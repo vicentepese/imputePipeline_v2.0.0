@@ -24,7 +24,7 @@
 ######## INITIALIZE ########
 
 # Read JSON file
-SETTINGS=pwd/settings.json
+SETTINGS=$(pwd)/settings.json
 
 # Initialize variables 
 PREFIX=$(jq -r '.prefix' $SETTINGS)
