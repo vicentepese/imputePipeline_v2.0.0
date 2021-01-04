@@ -6,6 +6,9 @@
 #SBATCH --account=mignot
 #SBATCH --array=1-22
 
+# Parse databases
+readarray -t conversations < <(get_json_array | jq -c '.[]')
+
 # Path to files / databases
 # Oxford
 OXFORD_IN=/labs/mignot/Oxford_LGI1_Imputed/CHR"${SLURM_ARRAY_TASK_ID}"_LGI1_QC.bgen

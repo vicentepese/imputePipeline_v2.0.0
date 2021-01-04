@@ -6,7 +6,7 @@
         "SLURM_IMPUTE_LOG":"/labs/mignot/GPC1_LGI1/SLURM_IMPUTE_LOG/",
         "SHAPEIT_IMPUTE_LOG":"/labs/mignot/GPC1_LGI1/SHAPEIT_IMPUTE_LOG/",
         "BIN_FOLDER":"/labs/mignot/GPC1_LGI1/GPC1_Imputed/",
-        "DATABASES":["/labs/mignot/PMRA_PLATES_125B3_131_133_to_141/imputePipeline/imputeFiles", "/labs/mignot/Oxford_LGI1_Imputed"]
+        "DATABASES":["/labs/mignot/Oxford_LGI1_Imputed/", "/labs/mignot/PMRA_PLATES_125B3_131_133_to_141/imputePipeline/imputeFiles/", "/oak/stanford/scg/lab_mignot/GENOS_QTLS_2019", "/labs/mignot/GPC1_LGI1/GPC1_Imputed/"]
     },
 
     "info":{
