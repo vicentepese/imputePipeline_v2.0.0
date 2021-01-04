@@ -54,3 +54,17 @@ mv slurm* $SLURM_IMPUTE_LOG
 if [ -d $SHAPEIT_IMPUTE_LOG ]; then rm -Rf $SHAPEIT_IMPUTE_LOG
 mkdir $SHAPEIT_IMPUTE_LOG
 mv shapeit* $SHAPEIT_IMPUTE_LOG
+
+########## CONCAT IMPUTED SEGEMENTS ##########
+sbatch scripts/CAT_IMPUTE_SLURM.sh -d ${FILESFOLDER}/imputeFiles/ -s $BINFILES_FOLDER -c $SCRIPTS -p $PREFIX
+
+# Sleep until job done 
+USERFLAG="INIT
+    USERFLAG"
+while $(echo "$USERFLAG" | wc -l) -lt 1 
+do 
+    # Update flag
+    USERFLAG=$(squeue -u $USER)
+    sleep 2m
+done
+
