@@ -69,7 +69,7 @@ cd $FILEPATH
 echo "ID_1 ID_2" >> CHR"$SLURM_ARRAY_TASK_ID"_"$PREFIX".sample
 echo "0 0" >> CHR"$SLURM_ARRAY_TASK_ID"_"$PREFIX".sample
 awk '{
-    $1=$1" "$1;
+    $1=$1" "$2;
     print $1;
   }' "$GWASBYCHR""$PREFIX"_CHR"$SLURM_ARRAY_TASK_ID".fam >> CHR"$SLURM_ARRAY_TASK_ID"_"$PREFIX".sample
 

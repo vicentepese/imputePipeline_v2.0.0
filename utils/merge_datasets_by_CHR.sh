@@ -7,7 +7,7 @@
 #SBATCH --array=1-22
 
 # Parse databases
-readarray -t conversations < <(get_json_array | jq -c '.[]')
+# readarray -t conversations < <(get_json_array | jq -c '.[]')
 
 # Path to files / databases
 # Oxford
@@ -52,3 +52,6 @@ qctool_v2.0.1 \
 -threshold 0.8 \
 -ofiletype binary_ped \
 -og ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1
+
+# Convert sample to fam 
+awk 'FNR==NR{a[NR]=$3;next}{$2=a[FNR]}1' ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.sample ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.fam
