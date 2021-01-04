@@ -6,6 +6,21 @@
 #SBATCH --account=mignot
 #SBATCH --time=12:00:00
 
+###################################################################
+#Script Name	: main.sh                                                                                       
+#Description	: Main script in the imputation pipeline. 
+#               + (I) Imputation: takes in base plink format bed files,
+#               + splits them into chromosomes ( 1 to 22) and then phases them using shapeit. 
+#               + after phasing each chromosome is imputed to 1000 genomes phase 3 in 1mb chunks.
+#               + Original code: https://github.com/Mignot-Lab/imputePipeline by @adiamb
+#               + (II) Clean up: cleans slurm and shape-it logs
+#               + (III) Concatenaion: Uses Uses QCTools to concat imputed segments (Original code: see above)
+#               + (IV) Sorting and convertings: Uses QCTools v2 to sort and convert by CHR 
+#Args           : Settings-based argument: settings.json                                                                                           
+#Author       	: Vicente Peris Sempere                         
+#Email         	: vipese@stanford.edu                                        
+###################################################################
+
 ######## INITIALIZE ########
 
 # Read JSON file
