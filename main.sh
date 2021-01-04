@@ -40,7 +40,7 @@ SCRIPTS=${FILESFOLDER}scripts/
 
 ########## IMPUTE PIPELINE ###########
 
-# Compute pipeline
+# Run pipeline
 python scripts/imputePipe.py -F $PREFIX -Ref $REF
 
 # Sleep until job done 
@@ -71,6 +71,8 @@ mkdir $SHAPEIT_IMPUTE_LOG
 mv shapeit* $SHAPEIT_IMPUTE_LOG
 
 ########## CONCAT IMPUTED SEGEMENTS ##########
+
+# Run concatenation
 sbatch scripts/CAT_IMPUTE_SLURM.sh -d ${FILESFOLDER}/imputeFiles/ -s $BINFILES_FOLDER -c $SCRIPTS -p $PREFIX
 
 # Sleep until job done 
@@ -84,4 +86,6 @@ do
 done
 
 ######### SORT CHR AND CONVERT TO BGEN #########
+
+# Sort and convert to BGEN
 sbatch ${SCRIPTS}SORT_IMPUTED_SLURM.sh -d $FILESFOLDER -s $BINFILES_FOLDER -p $PREFIX
