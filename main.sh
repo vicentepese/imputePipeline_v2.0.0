@@ -6,6 +6,8 @@
 #SBATCH --account=mignot
 #SBATCH --time=12:00:00
 
+######## INITIALIZE ########
+
 # Read JSON file
 SETTINGS=pwd/settings.json
 
@@ -21,6 +23,8 @@ SHAPEIT_IMPUTE_LOG=$(jq -r '.folder.SHAPEIT_IMPUTE_LOG' $SETTINGS)
 BINFILES_FOLDER=$(jq -r '.folder.BINFILES_FOLDER' $SETTINGS)
 SCRIPTS=${FILESFOLDER}scripts/
 
+########## IMPUTE PIPELINE ###########
+
 # Compute pipeline
 python scripts/imputePipe.py -F $PREFIX -Ref $REF
 
@@ -34,5 +38,19 @@ do
     sleep 2m
 done
 
+######## CLEAN UP #########
 
+# Clean up: copy CHR files in directory 
+if [ -d $GWAS_BY_CHR_FOLDER ]; then rm -Rf $GWAS_BY_CHR_FOLDER
+mkdir $GWAS_BY_CHR_FOLDER
+mv $PREFIX_CHR* $GWAS_BY_CHR_FOLDER
 
+# Clean up: copy slurm outputs 
+if [ -d $SLURM_IMPUTE_LOG ]; then rm -Rf $SLURM_IMPUTE_LOG
+mkdir $SLURM_IMPUTE_LOG
+mv slurm* $SLURM_IMPUTE_LOG
+
+# Clean up shapeit
+if [ -d $SHAPEIT_IMPUTE_LOG ]; then rm -Rf $SHAPEIT_IMPUTE_LOG
+mkdir $SHAPEIT_IMPUTE_LOG
+mv shapeit* $SHAPEIT_IMPUTE_LOG
