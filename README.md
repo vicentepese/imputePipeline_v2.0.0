@@ -1,2 +1,2 @@
-# imputePipeline_v2.0.0
-Automatized version of Aditya's imputePipeline
+# Imputation_pipeline_v2
+Second version of imputation pipeline designed by Aditya
