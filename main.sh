@@ -68,3 +68,5 @@ do
     sleep 2m
 done
 
+######### SORT CHR AND CONVERT TO BGEN #########
+sbatch ${SCRIPTS}SORT_IMPUTED_SLURM.sh -d $FILESFOLDER -s $BINFILES_FOLDER -p $PREFIX

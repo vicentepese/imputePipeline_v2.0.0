@@ -41,8 +41,5 @@ def main():
     subprocess.call(['sbatch  {scripts}SORT_IMPUTED_SLURM.sh -d {path} -s {savepath} -p {prefix}'.format(path = Bin_folder, savepath = Bin_folder, \
         scripts = scripts, prefix = prefix)], shell = True)
 
-    # Convert to binary ped
-    # subprocess.call('sbatch scripts/CONVERT_GEN2BED.sh -p {path} -s {savepath}'.format(path = Bin_folder, savepath = Bin_folder), shell = True)
-
 if __name__ == "__main__":
     main()
