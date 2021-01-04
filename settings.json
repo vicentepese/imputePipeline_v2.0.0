@@ -1,6 +1,7 @@
 {
 
     "folder":{
+        "FILESFOLDER":"/labs/mignot/GPC1_LGI1/",
         "GWAS_BY_CHR":"/labs/mignot/GPC1_LGI1/GWAS_BY_CHR/",
         "SLURM_IMPUTE_LOG":"/labs/mignot/GPC1_LGI1/SLURM_IMPUTE_LOG/",
         "SHAPEIT_IMPUTE_LOG":"/labs/mignot/GPC1_LGI1/SHAPEIT_IMPUTE_LOG/",
