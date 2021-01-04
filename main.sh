@@ -10,4 +10,13 @@
 SETTINGS=pwd/settings.json
 
 # Initialize variables 
-PREFIX=$(jq -r '.folder.SLURM_IMPUTE_LOG' settings.json)
+PREFIX=$(jq -r '.prefix' $SETTINGS)
+REF=$(jq -r '.ref' $SETTINGS)
+
+# Intialize folders
+GWAS_BY_CHR_FOLDER=$(jq -r '.folder.GWAS_BY_CHR' $SETTINGS)
+SLURM_IMPUTE_LOG=$(jq -r '.folder.SLURM_IMPUTE_LOG' $SETTINGS)
+SHAPEIT_IMPUTE_LOG=$(jq -r '.folder.SHAPEIT_IMPUTE_LOG' $SETTINGS)
+IMPUTEFILES_FOLDER=$(jq -r '.folder.SHAPEIT_IMPUTE_LOG' $SETTINGS)
+BINFILES_FOLDER=$(jq -r '.folder.BINFILES_FOLDER' $SETTINGS)
+
