@@ -36,11 +36,13 @@ There are certain issues that must be taken into consideration prior to utilizin
 1. Low memory: the pipeline can be computationally heavy, and may not perform correctly with large datasets. Allow always ~50 GB of free space.
 2. The pipeline will fail if the files to be imputed contain duplicated variants (by position) or IDs.
 3. The pipeline only accepts one file at a time. That is, it will not deal with multiple _.bed_ files or databases.
+4. As of yet, the pipeline does not convert to _.bed_ files. This is because it converts to _.bgen_ and to allow merging it with other databases.
 
-## Future changes
+## Future changes /
 The following changes are recommended to improve the pipeline:
 1. Add headers to files.
 2. Improve `main.sh`
 3. Cleaning may be put into a single bash file in order to tidy up `main.sh`
 4. Include QC (remove duplciated variants and IIDs).
+5. Finalize *utils*, to merge by CHR and between datasets. Maybe include it in main and add `settings.json` option.
 
