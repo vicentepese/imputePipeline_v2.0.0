@@ -37,10 +37,6 @@ The pipeline encompasses certain issues that must be taken into consideration pr
 2. The pipeline will fail if the files to be imputed contain duplicated variants (by position) or IDs.
 3. The pipeline only accepts a file at a time. That is, it will not deal with multiple _.bed_ files or databases.
 
-Low memory --> have to fix the impute Files
-Improve main.sh 
-Add QC to files (remove duplicated variants, and duplicated IIDs)
-
 ## Future changes
 The following changes are recommended to improve the pipeline
 1. Add headers to files
