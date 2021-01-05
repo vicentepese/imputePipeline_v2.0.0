@@ -15,7 +15,8 @@ The pipeline performs the following steps:
 ## Requirements
 ### Packages
 The pipeline requires the following modules 
-`plink  qctool/v2.0.1`
+``plink
+qctool/v2.0.1``
 
 ### Settings
 To operate the pipeline, all the arguments must be introduced through the _settings.json_ file. Particularly, you must keep in mind:
