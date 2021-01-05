@@ -46,4 +46,5 @@ The following changes are recommended to improve the pipeline:
 3. Cleaning may be put into a single bash file in order to tidy up `main.sh`
 4. Include QC (remove duplciated variants and IIDs).
 5. Finalize *utils*, to merge by CHR and between datasets. Maybe include it in main and add `settings.json` option.
+6. Add more verbose.
 
