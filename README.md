@@ -27,7 +27,7 @@ For more information regarding each of the elements in the _settings.json_ file,
 ### Computation 
 To run the pipeline:
 1. Clone the repository 
-2. Copy the _.bed_ files 
+2. Copy the _.bed_ files inside the directory
 3. Fill up the _settings.json_ file.
 4. Run from the repository's directory `sbatch main.sh`
 
