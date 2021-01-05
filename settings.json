@@ -10,6 +10,7 @@
     },
 
     "info":{
+        "FILESFOLDER":"Folder containing the pipeline (repository) and the data to impute",
         "GWAS_BY_CHR":" Folder containing the imputed GWAS separated by CHR",
         "SLURM_IMPUTE_LOG":" Folder containing slurm outputs and errors",
         "SHAPEIT_IMPUTE_LOG":" Folder containing SHAPEIT logs",
