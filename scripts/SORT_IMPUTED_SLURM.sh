@@ -82,20 +82,6 @@ qctool_v2.0.1 \
 -og CHR"$SLURM_ARRAY_TASK_ID"_"$PREFIX".bgen \
 -os CHR"$SLURM_ARRAY_TASK_ID"_"$PREFIX".sample
 
-# Manage SAVEPATH (create/delate)
-if [[ -d "$SAVEPATH" && "$SAVEPATH" != "$FILEPATH" ]]
-then 
-  rm -Rf $SAVEPATH;
-  mkdir $SAVEPATH;
-elif [[ -d "$SAVEPATH" && "$SAVEPATH" == "$FILEPATH" ]]
-then 
-  :
-fi
-
-# Move files
-mv CHR"$SLURM_ARRAY_TASK_ID"_"$PREFIX".bgen $SAVEPATH
-mv CHR"$SLURM_ARRAY_TASK_ID"_"$PREFIX".sample $SAVEPATH
-mv SORT_LGI1* $SLURMDIR
 
 # Print 
 echo "File saved in $SAVEPATH"
