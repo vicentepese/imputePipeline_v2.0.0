@@ -35,7 +35,7 @@ FILESFOLDER=$(jq -r '.folder.FILESFOLDER' $SETTINGS)
 GWAS_BY_CHR_FOLDER=$(jq -r '.folder.GWAS_BY_CHR' $SETTINGS)
 SLURM_IMPUTE_LOG=$(jq -r '.folder.SLURM_IMPUTE_LOG' $SETTINGS)
 SHAPEIT_IMPUTE_LOG=$(jq -r '.folder.SHAPEIT_IMPUTE_LOG' $SETTINGS)
-BINFILES_FOLDER=$(jq -r '.folder.BINFILES_FOLDER' $SETTINGS)
+BINFILES_FOLDER=$(jq -r '.folder.BIN_FOLDER' $SETTINGS)
 SCRIPTS=${FILESFOLDER}scripts/
 
 ########## IMPUTE PIPELINE ###########
@@ -72,6 +72,10 @@ mv shapeit* $SHAPEIT_IMPUTE_LOG
 
 ########## CONCAT IMPUTED SEGEMENTS ##########
 
+# Clean BINFILES folder / create directory
+if [ -d $BINFILES_FOLDER ]; then rm -Rf $BINFILES_FOLDER; fi
+mkdir $BINFILES_FOLDER
+
 # Run concatenation
 sbatch scripts/CAT_IMPUTE_SLURM.sh -d ${FILESFOLDER}/imputeFiles/ -s $BINFILES_FOLDER -c $SCRIPTS -p $PREFIX
 
@@ -89,3 +93,13 @@ done
 
 # Sort and convert to BGEN
 sbatch ${SCRIPTS}SORT_IMPUTED_SLURM.sh -d $FILESFOLDER -s $BINFILES_FOLDER -p $PREFIX
+
+# Sleep until done 
+USERFLAG="INIT 
+    USERFLAG"
+while [ $(echo "$USERFLAG" | wc -l) -gt 1 ];
+do 
+    # Update flag
+    USERFLAG=$(squeue -u $USER)
+    sleep 2m
+done
