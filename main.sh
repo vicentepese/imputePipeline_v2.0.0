@@ -44,9 +44,9 @@ SCRIPTS=${FILESFOLDER}scripts/
 python scripts/imputePipe.py -F $PREFIX -Ref $REF
 
 # Sleep until job done 
-USERFLAG="INIT
+USERFLAG="INIT 
     USERFLAG"
-while $(echo "$USERFLAG" | wc -l) -lt 1 
+while [ $(echo "$USERFLAG" | wc -l) -gt 1 ];
 do 
     # Update flag
     USERFLAG=$(squeue -u $USER)
@@ -76,9 +76,9 @@ mv shapeit* $SHAPEIT_IMPUTE_LOG
 sbatch scripts/CAT_IMPUTE_SLURM.sh -d ${FILESFOLDER}/imputeFiles/ -s $BINFILES_FOLDER -c $SCRIPTS -p $PREFIX
 
 # Sleep until job done 
-USERFLAG="INIT
+USERFLAG="INIT 
     USERFLAG"
-while $(echo "$USERFLAG" | wc -l) -lt 1 
+while [ $(echo "$USERFLAG" | wc -l) -gt 1 ];
 do 
     # Update flag
     USERFLAG=$(squeue -u $USER)
