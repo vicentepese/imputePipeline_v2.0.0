@@ -56,17 +56,17 @@ done
 ######## CLEAN UP #########
 
 # Clean up: copy CHR files in directory 
-if [ -d $GWAS_BY_CHR_FOLDER ]; then rm -Rf $GWAS_BY_CHR_FOLDER
+if [ -d $GWAS_BY_CHR_FOLDER ]; then rm -Rf $GWAS_BY_CHR_FOLDER; fi
 mkdir $GWAS_BY_CHR_FOLDER
-mv $PREFIX_CHR* $GWAS_BY_CHR_FOLDER
+mv ${PREFIX}_CHR* $GWAS_BY_CHR_FOLDER
 
 # Clean up: copy slurm outputs 
-if [ -d $SLURM_IMPUTE_LOG ]; then rm -Rf $SLURM_IMPUTE_LOG
+if [ -d $SLURM_IMPUTE_LOG ]; then rm -Rf $SLURM_IMPUTE_LOG; fi
 mkdir $SLURM_IMPUTE_LOG
 mv slurm* $SLURM_IMPUTE_LOG
 
 # Clean up shapeit
-if [ -d $SHAPEIT_IMPUTE_LOG ]; then rm -Rf $SHAPEIT_IMPUTE_LOG
+if [ -d $SHAPEIT_IMPUTE_LOG ]; then rm -Rf $SHAPEIT_IMPUTE_LOG; fi
 mkdir $SHAPEIT_IMPUTE_LOG
 mv shapeit* $SHAPEIT_IMPUTE_LOG
 
