@@ -14,8 +14,8 @@ usage() {
   cat << EOF >&2
 Usage: $PROGNAME [-p <path>]
 
--p <path>: Path where outputs from imputePipe.py are located
--s <save-path>: Path where .bgen files will be saved
+-d <directory>: Path where concatenated outputs from imputePipe.py are located
+-p <prefix>: Prefix
 EOF
   exit 1
 }
@@ -34,11 +34,6 @@ case $key in
     ;;
     -d|--directory)
     FILEPATH="$2"
-    shift # past argument
-    shift # past value
-    ;;
-    -s|--save-path)
-    SAVEPATH="$2"
     shift # past argument
     shift # past value
     ;;
