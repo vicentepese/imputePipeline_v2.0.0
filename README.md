@@ -7,7 +7,7 @@ This pipeline is SLURM-dependant, and therefore may only be used under Stanford 
 
 ## Description
 The pipeline performs the following steps:
-1. Takes base PLINK format _.bed_ files, splits them into chromosomes (1 to 22), phases them using (SHAPEIT)[https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.html], and subsequently imputes each chromosome individually to (1000 Genomes Phase I)[https://www.internationalgenome.org/] in segments of 1 mb. (Unmodified  from (Original Code)[(https://github.com/Mignot-Lab/imputePipeline]).
+1. Takes base PLINK format _.bed_ files, splits them into chromosomes (1 to 22), phases them using [SHAPEIT](https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.html), and subsequently imputes each chromosome individually to [1000 Genomes Phase I](https://www.internationalgenome.org/) in segments of 1 mb. (Unmodified  from [Original Code](https://github.com/Mignot-Lab/imputePipeline).
 2. Cleans up SLURM and SHAPEIT _.log_ files (Added)
 3. Concatenates the imputed segments from step 1) (Modified from Original Code)
 4. Sorts and converts to _.bgen_ format (Modified from Original Code)
