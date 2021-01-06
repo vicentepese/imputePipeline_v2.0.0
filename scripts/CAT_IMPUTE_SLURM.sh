@@ -62,8 +62,9 @@ case $key in
 esac
 done
 
-# Read settings
+# Read settings and pwd
 SLURMDIR=$(jq -r '.folder.SLURM_IMPUTE_LOG' settings.json)
+PWD=$(pwd)
 
 # Go to path 
 cd $FILESPATH
@@ -74,4 +75,4 @@ python ${SCRIPTPATH}CONCAT_IMPUTE.py -F CHR"${SLURM_ARRAY_TASK_ID}"_${PREFIX}
 # Move file 
 [ -d $SAVEPATH ] || mkdir $SAVEPATH   # Create directory if does not exist 
 mv CHR"${SLURM_ARRAY_TASK_ID}"_$PREFIX*.gz $SAVEPATH
-mv CAT_IMPUTEFILES* $SLURMDIR
+mv ${pwd}/CAT_IMPUTEFILES* $SLURMDIR
