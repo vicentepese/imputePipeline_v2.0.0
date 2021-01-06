@@ -92,7 +92,7 @@ done
 ######### SORT CHR AND CONVERT TO BGEN #########
 
 # Sort and convert to BGEN
-sbatch ${SCRIPTS}SORT_IMPUTED_SLURM.sh -d $FILESFOLDER -p $PREFIX
+sbatch ${SCRIPTS}SORT_IMPUTED_SLURM.sh -d $BINFILES_FOLDER -p $PREFIX
 
 # Sleep until done 
 USERFLAG="INIT 
