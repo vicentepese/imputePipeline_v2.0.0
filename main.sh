@@ -4,7 +4,7 @@
 #SBATCH --output=MAIN_LGI1.out
 #SBATCH --error=MAIN_LGI1.err
 #SBATCH --account=mignot
-#SBATCH --time=12:00:00
+#SBATCH --time=24:00:00
 
 ###################################################################
 #Script Name	: main.sh                                                                                       

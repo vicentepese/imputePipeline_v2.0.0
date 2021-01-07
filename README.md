@@ -38,6 +38,7 @@ There are certain issues that must be taken into consideration prior to utilizin
 3. The pipeline only accepts one file at a time. That is, it will not deal with multiple _.bed_ files or databases.
 4. As of yet, the pipeline does not convert to _.bed_ files. This is because it converts to _.bgen_ and to allows merging it with other databases.
 5. Pipeline may not be function if the file to impute has multi-allelic variants.
+6. There is an issue when merging by chromosomes using QCTOOLS. When it converts to _.fam_ it messes up the IIDs.
 
 ## Future changes /
 The following changes are recommended to improve the pipeline:
