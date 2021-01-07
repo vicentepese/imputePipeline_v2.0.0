@@ -11,8 +11,8 @@
 
 # Path to files / databases
 # Oxford
-OXFORD_IN=/labs/mignot/Oxford_LGI1_Imputed/CHR"${SLURM_ARRAY_TASK_ID}"_LGI1_QC.bgen
-OXFORD_SAMPLE=/labs/mignot/Oxford_LGI1_Imputed/CHR"${SLURM_ARRAY_TASK_ID}"_LGI1_QC.sample
+OXFORD_IN=/labs/mignot/LGI1/Oxford_LGI1_Imputed/CHR"${SLURM_ARRAY_TASK_ID}"_Oxford_LGI1.bgen
+OXFORD_SAMPLE=/labs/mignot/LGI1/Oxford_LGI1_Imputed/CHR"${SLURM_ARRAY_TASK_ID}"_Oxford_LGI1.sample
 
 # Lyon
 LYON_IN=/labs/mignot/PMRA_PLATES_125B3_131_133_to_141/imputePipeline/imputeFiles/CHR"${SLURM_ARRAY_TASK_ID}"_Stanford_125B3_131_133_to_141Qced_SORTED.bgen
@@ -23,14 +23,14 @@ PREVIOUSCASE_IN=/oak/stanford/scg/lab_mignot/GENOS_QTLS_2019/CHR"${SLURM_ARRAY_T
 PREVIOUSCASE_SAMPLE=/oak/stanford/scg/lab_mignot/GENOS_QTLS_2019/CHR"${SLURM_ARRAY_TASK_ID}"_Plates_77_to_121_PMRA_shapeit_SORTED_SORTED.sample
 
 # Previous databases II
-PREVIOUSCONTROL_IN=/labs/mignot/GPC1_LGI1/GPC1_Imputed/CHR"${SLURM_ARRAY_TASK_ID}"_gpc1_pchip-QC.bgen
-PREVIOUSCONTROL_SAMPLE=/labs/mignot/GPC1_LGI1/GPC1_Imputed/CHR"${SLURM_ARRAY_TASK_ID}"_gpc1_pchip-QC.sample
+PREVIOUSCONTROL_IN=/oak/stanford/scg/lab_mignot/LGI1/GPC1_LGI1_Imputed/CHR"${SLURM_ARRAY_TASK_ID}"_GPC_LGI1.bgen
+PREVIOUSCONTROL_SAMPLE=/oak/stanford/scg/lab_mignot/LGI1/GPC1_LGI1_Imputed/CHR"${SLURM_ARRAY_TASK_ID}"_GPC_LGI1.sample
 
 # File to patlist
-sampleIDs=/labs/mignot/GPC1_LGI1/Resources/LGI1_patList.txt
+sampleIDs=/labs/mignot/GPC_LGI1/Resources/LGI1_patList.txt
 
 # Out folder
-OUTFOLDER=/labs/mignot/LGI1_GWAS/
+OUTFOLDER=/oak/stanford/scg/lab_mignot/LGI1/LGI1_GWAS/
 
 # Load module
 module load qctool/v2.0.1
@@ -46,12 +46,15 @@ qctool_v2.0.1 \
 -g $PREVIOUSCONTROL_IN \
 -s $PREVIOUSCONTROL_SAMPLE \
 -assume-chromosome "$SLURM_ARRAY_TASK_ID" \
--incl-samples $sampleIDs \
 -compare-variants-by position,alleles \
+-incl-samples $sampleIDs \
 -threads 16 \
 -threshold 0.8 \
 -ofiletype binary_ped \
--og ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1
+-og ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1 \
+-os ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.sample
 
-# Convert sample to fam 
-awk 'FNR==NR{a[NR]=$3;next}{$2=a[FNR]}1' ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.sample ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.fam
+# Modify .fam file: ISSUE -- When converting to bed, QCTOOLS ignores the IIDs in the sample files -- loses also pheno and sex
+awk 'NR>2 {print $0}' ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.sample > temp
+awk 'FNR==NR{a[NR]=$1;next}{$1=a[FNR]}1' temp ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.fam > fam_temp && mv fam_temp ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.fam
+awk 'FNR==NR{a[NR]=$2;next}{$2=a[FNR]}1' temp ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.fam  > fam_temp && mv fam_temp ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.fam
