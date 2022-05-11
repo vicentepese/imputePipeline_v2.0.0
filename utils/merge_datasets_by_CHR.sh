@@ -9,6 +9,9 @@
 # Parse databases
 # readarray -t conversations < <(get_json_array | jq -c '.[]')
 
+# PREFIX
+PREFIX=LGI1
+
 # Path to files / databases
 # Oxford
 OXFORD_IN=/labs/mignot/LGI1/Oxford_LGI1_Imputed/CHR"${SLURM_ARRAY_TASK_ID}"_Oxford_LGI1.bgen
@@ -51,10 +54,10 @@ qctool_v2.0.1 \
 -threads 16 \
 -threshold 0.8 \
 -ofiletype binary_ped \
--og ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1 \
--os ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.sample
+-og ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX} \
+-os ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.sample
 
 # Modify .fam file: ISSUE -- When converting to bed, QCTOOLS ignores the IIDs in the sample files -- loses also pheno and sex
-awk 'NR>2 {print $0}' ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.sample > temp
-awk 'FNR==NR{a[NR]=$1;next}{$1=a[FNR]}1' temp ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.fam > fam_temp && mv fam_temp ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.fam
-awk 'FNR==NR{a[NR]=$2;next}{$2=a[FNR]}1' temp ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.fam  > fam_temp && mv fam_temp ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_LGI1.fam
+awk 'NR>2 {print $0}' ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.sample > temp_"$SLURM_ARRAY_TASK_ID"
+awk 'FNR==NR{a[NR]=$1;next}{$1=a[FNR]}1' temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.fam > fam_temp_"$SLURM_ARRAY_TASK_ID" && mv fam_temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.fam
+awk 'FNR==NR{a[NR]=$2;next}{$2=a[FNR]}1' temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.fam  > fam_temp_"$SLURM_ARRAY_TASK_ID" && mv fam_temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.fam
