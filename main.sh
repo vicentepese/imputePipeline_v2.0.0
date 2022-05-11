@@ -38,6 +38,31 @@ SHAPEIT_IMPUTE_LOG=$(jq -r '.folder.SHAPEIT_IMPUTE_LOG' $SETTINGS)
 BINFILES_FOLDER=$(jq -r '.folder.BIN_FOLDER' $SETTINGS)
 SCRIPTS=${FILESFOLDER}scripts/
 
+########## PREPROCESSING ###########
+
+# Load module 
+module load plink 
+
+# If files are not binarize, binarize
+FILES=$(ls *${PREFIX}*)
+if [ ! -f ${PREFIX}.bed ]; then 
+    plink --file ${PREFIX} --allow-no-sex --no-sex --no-fid --no-parents --no-pheno --make-bed --out ${PREFIX}
+fi
+
+# Create file with duplicated variants
+plink --bfile ${PREFIX} --list-duplicate-vars suppress-first \
+    --allow-no-sex --out temp > temp
+awk '{print $4}' temp.dupvar > DupSNPs.txt
+rm -r temp*
+
+# Remove duplicated variants 
+plink --bfile ${PREFIX} --exclude DupSNPs.txt\
+    --allow-no-sex \
+    --make-bed --out gwastempFilt > gwastempFilt
+rm -r ${PREFIX}.bed ${PREFIX}.fam ${PREFIX}.bim
+mv gwastempFilt.bed ${PREFIX}.bed;  mv gwastempFilt.fam ${PREFIX}.fam;  mv gwastempFilt.bim ${PREFIX}.bim;  
+rm -r gwastempFilt*
+
 ########## IMPUTE PIPELINE ###########
 
 # Run pipeline
