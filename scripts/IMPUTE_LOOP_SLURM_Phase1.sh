@@ -7,7 +7,7 @@ mkdir -p imputeFiles
 for i in `seq 0 $2` 
 do
 interval=`echo $i'e6 '$(($i +1))'e6'`
-command=`echo ./bin/impute2 -known_haps_g "$3"_CHR"$1".haps -h /labs/mignot/IMPUTE_REFERENCE_PHASE1/ALL.chr"$1".integrated_phase1_v3.20101123.snps_indels_svs.genotypes.nomono.haplotypes.gz -l /labs/mignot/IMPUTE_REFERENCE_PHASE1/ALL.chr"$1".integrated_phase1_v3.20101123.snps_indels_svs.genotypes.nomono.legend.gz -m /labs/mignot/IMPUTE_REFERENCE_PHASE1/genetic_map_chr"$1"_combined_b37.txt -int "$interval" -buffer 500 -Ne 20000 -o imputeFiles/CHR"$1"_"$3"."$i"`
+command=`echo ./bin/impute2 -known_haps_g "$3"_CHR"$1".haps -h /labs/mignot/raw_data/gwas/1000Genomes/IMPUTE_REFERENCE_PHASE1/ALL.chr"$1".integrated_phase1_v3.20101123.snps_indels_svs.genotypes.nomono.haplotypes.gz -l /labs/mignot/raw_data/gwas/1000Genomes/IMPUTE_REFERENCE_PHASE1/ALL.chr"$1".integrated_phase1_v3.20101123.snps_indels_svs.genotypes.nomono.legend.gz -m /labs/mignot/raw_data/gwas/1000Genomes/IMPUTE_REFERENCE_PHASE1/genetic_map_chr"$1"_combined_b37.txt -int "$interval" -buffer 500 -Ne 20000 -o imputeFiles/CHR"$1"_"$3"."$i"`
 touch tmpchr"$1".$i.sh
 chmod 755 tmpchr"$1".$i.sh
 if [[ $4 -eq 0 ]]; then
