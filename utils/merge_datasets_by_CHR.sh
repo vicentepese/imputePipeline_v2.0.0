@@ -54,10 +54,10 @@ qctool_v2.0.1 \
 -threads 16 \
 -threshold 0.8 \
 -ofiletype binary_ped \
--og ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX} \
--os ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.sample
+-og ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX} \
+-os ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.sample
 
 # Modify .fam file: ISSUE -- When converting to bed, QCTOOLS ignores the IIDs in the sample files -- loses also pheno and sex
-awk 'NR>2 {print $0}' ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.sample > temp_"$SLURM_ARRAY_TASK_ID"
-awk 'FNR==NR{a[NR]=$1;next}{$1=a[FNR]}1' temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.fam > fam_temp_"$SLURM_ARRAY_TASK_ID" && mv fam_temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.fam
-awk 'FNR==NR{a[NR]=$2;next}{$2=a[FNR]}1' temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.fam  > fam_temp_"$SLURM_ARRAY_TASK_ID" && mv fam_temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_{$PREFIX}.fam
+awk 'NR>2 {print $0}' ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.sample > temp_"$SLURM_ARRAY_TASK_ID"
+awk 'FNR==NR{a[NR]=$1;next}{$1=a[FNR]}1' temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam > fam_temp_"$SLURM_ARRAY_TASK_ID" && mv fam_temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam
+awk 'FNR==NR{a[NR]=$2;next}{$2=a[FNR]}1' temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam  > fam_temp_"$SLURM_ARRAY_TASK_ID" && mv fam_temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam
