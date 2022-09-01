@@ -17,22 +17,11 @@ REF=$(jq -r '.ref' $SETTINGS)
 MERGE=$(jq -r '.merge' $SETTINGS)
 
 # Intialize folders
-FILESFOLDER=$(jq -r '.folder.FILESFOLDER' $SETTINGS)
 GWAS_BY_CHR_FOLDER=$(jq -r '.folder.GWAS_BY_CHR' $SETTINGS)
-SLURM_IMPUTE_LOG=$(jq -r '.folder.SLURM_IMPUTE_LOG' $SETTINGS)
-SHAPEIT_IMPUTE_LOG=$(jq -r '.folder.SHAPEIT_IMPUTE_LOG' $SETTINGS)
-BINFILES_FOLDER=$(jq -r '.folder.BIN_FOLDER' $SETTINGS)
-SCRIPTS=${FILESFOLDER}scripts/
-
-# PREFIX
-PREFIX=LGI1
 
 # Path to files / databases
 DATA_IN=${GWAS_BY_CHR_FOLDER}CHR"${SLURM_ARRAY_TASK_ID}"_${PREFIX}.bgen
 DATA_SAMPLE=${GWAS_BY_CHR_FOLDER}CHR"${SLURM_ARRAY_TASK_ID}"_${PREFIX}.sample
-
-# Out folder
-OUTFOLDER=/oak/stanford/scg/lab_mignot/LGI1/LGI1_GWAS/
 
 # Load module
 module load qctool/v2.0.1
