@@ -143,3 +143,22 @@ do
     USERFLAG=$(squeue -u $USER)
     sleep 2m
 done
+
+######### CONVER TO BINARY PLINK AND MERGE #########
+
+# Convert to plink
+sbatch ${SCRIPTS}bgen2.PLINK
+
+# Sleep until done 
+USERFLAG="INIT 
+    USERFLAG
+    LINE"
+while [ $(echo "$USERFLAG" | wc -l) -gt 2 ];
+do 
+    # Update flag
+    USERFLAG=$(squeue -u $USER)
+    sleep 2m
+done
+
+sbatch ${SCRIPTS}merge_cohort.sh
+
