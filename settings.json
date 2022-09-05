@@ -1,12 +1,12 @@
 {
 
     "folder":{
-        "FILESFOLDER":"/home/vipese/Documents/imputePipeline_v2.0.0/",
-        "GWAS_BY_CHR":"/home/vipese/Documents/imputePipeline_v2.0.0/GWAS_BY_CHR/",
-        "SLURM_IMPUTE_LOG":"/home/vipese/Documents/imputePipeline_v2.0.0/SLURM_IMPUTE_LOG/",
-        "SHAPEIT_IMPUTE_LOG":"/home/vipese/Documents/imputePipeline_v2.0.0/SHAPEIT_IMPUTE_LOG/",
-        "BIN_FOLDER":"/home/vipese/Documents/imputePipeline_v2.0.0/INFINIUM_PLATES_62_to_68_IMPUTED/",
-        "DATABASES":["/home/vipese/Documents/imputePipeline_v2.0.0_Imputed/", "/labs/mignot/PMRA_PLATES_125B3_131_133_to_141/imputePipeline/imputeFiles/", "/oak/stanford/scg/lab_mignot/GENOS_QTLS_2019", "/labs/mignot/GPC1_LGI1/GPC1_Imputed/"]
+        "FILESFOLDER":"/labs/mignot/researchers/vipese/NMDA_GWAS_imputation/imputePipeline_v2.0.0/",
+        "GWAS_BY_CHR":"/labs/mignot/researchers/vipese/NMDA_GWAS_imputation/imputePipeline_v2.0.0/GWAS_BY_CHR/",
+        "SLURM_IMPUTE_LOG":"/labs/mignot/researchers/vipese/NMDA_GWAS_imputation/imputePipeline_v2.0.0/SLURM_IMPUTE_LOG/",
+        "SHAPEIT_IMPUTE_LOG":"/labs/mignot/researchers/vipese/NMDA_GWAS_imputation/imputePipeline_v2.0.0/SHAPEIT_IMPUTE_LOG/",
+        "BIN_FOLDER":"/labs/mignot/researchers/vipese/NMDA_GWAS_imputation/GERA_EUR_NMDArep_IMPUTED/",
+        "DATABASES":["/labs/mignot/researchers/vipese/NMDA_GWAS_imputation/imputePipeline_v2.0.0_Imputed/", "/labs/mignot/PMRA_PLATES_125B3_131_133_to_141/imputePipeline/imputeFiles/", "/oak/stanford/scg/lab_mignot/GENOS_QTLS_2019", "/labs/mignot/GPC1_LGI1/GPC1_Imputed/"]
     },
 
     "info":{
@@ -18,8 +18,9 @@
         "DATABASES":"Folders to: LGI1_Lyon, Oxford_LGI1, Stanford_I_LGI1, Stanford_II_LGI1"
     },
 
-    "prefix":"Infinium_mega_sleep_62_to_68",
+    "prefix":"GERA_EUR_FOR_NMDArep_shapeit",
     "ref":"3",
-    "merge":true
+    "merge":true,
+    "MAF":0.05
 
 }
