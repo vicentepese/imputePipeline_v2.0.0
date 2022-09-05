@@ -17,7 +17,7 @@ MAF=$(jq -r '.MAF' $SETTINGS)
 
 # Create mergelist 
 MERGELIST="$BIN_FOLDER"mergelist.txt
-ls -1 "$FILES"*.bed | xargs -n 1 basename | cut -f1 -d.  > $MERGELIST
+ls -1 "$BIN_FOLDER"*.bed | xargs -n 1 basename | cut -f1 -d.  > $MERGELIST
 MERGEVAR=($(cat $MERGELIST))
 rm $MERGELIST
 
