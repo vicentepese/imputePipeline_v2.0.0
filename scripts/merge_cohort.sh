@@ -8,20 +8,18 @@
 # Read JSON file
 SETTINGS=$(pwd)/settings.json
 
-# Initialize variables 
+# Initialize prefix and folder
 PREFIX=$(jq -r '.prefix' $SETTINGS)
-REF=$(jq -r '.ref' $SETTINGS)
-MERGE=$(jq -r '.merge' $SETTINGS)
+BIN_FOLDER=$(jq -r '.folder.BIN_FOLDER' $SETTINGS)
 
-# Intialize folders
-GWAS_BY_CHR_FOLDER=$(jq -r '.folder.GWAS_BY_CHR' $SETTINGS)
-
-# Initialize plink variables 
-MAF=0.05
+# Initialize Minimum Allele Frequency for filtering
+MAF=$(jq -r '.MAF' $SETTINGS)
 
 # Create mergelist 
+MERGELIST="$BIN_FOLDER"mergelist.txt
 ls -1 "$FILES"*.bed | xargs -n 1 basename | cut -f1 -d.  > $MERGELIST
 MERGEVAR=($(cat $MERGELIST))
+rm $MERGELIST
 
 # Load module 
 module load plink
