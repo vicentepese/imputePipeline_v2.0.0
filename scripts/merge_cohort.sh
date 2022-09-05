@@ -32,16 +32,16 @@ do
     echo "QCing "${MERGEVAR[$i]}
 
     # Parse duplicated variants
-    plink --bfile ${FILES}${MERGEVAR[$i]} --list-duplicate-vars suppress-first \
+    plink --bfile ${BIN_FOLDER}${MERGEVAR[$i]} --list-duplicate-vars suppress-first \
         --allow-no-sex --out temp >> temp
     awk '{print $4}' temp.dupvar > DUPSNPS.txt
     rm -r temp*
 
     # QC (duplicated variants and MAF)
-    plink --bfile ${FILES}${MERGEVAR[$i]} --exclude DUPSNPS.txt \
+    plink --bfile ${BIN_FOLDER}${MERGEVAR[$i]} --exclude DUPSNPS.txt \
         --allow-no-sex \
         --maf $MAF \
-        --make-bed --out ${FILES}${MERGEVAR[$i]}_QC 
+        --make-bed --out ${BIN_FOLDER}${MERGEVAR[$i]}_QC 
 
     # Print 
     echo "------------------------------------------------------------------------------"
@@ -49,11 +49,11 @@ do
 done 
 
 # Merge first pass
-plink --bfile ${FILES}${MERGEVAR[0]}_QC --bmerge ${FILES}${MERGEVAR[1]}_QC \
---make-bed --out ${FILES}${PREFIX}
+plink --bfile ${BIN_FOLDER}${MERGEVAR[0]}_QC --bmerge ${BIN_FOLDER}${MERGEVAR[1]}_QC \
+--make-bed --out ${BIN_FOLDER}${PREFIX}
 
 # For loop to merge 
-LENFILES=${#MERGEVAR[@]}
+LENBIN_FOLDER=${#MERGEVAR[@]}
 
 for IDX in $(seq 2 21)
 do
@@ -67,24 +67,24 @@ do
 
     # Parse duplicated variants
     echo "------------------------------------------------------------------------------"
-    plink --bfile ${FILES}${CHR} --list-duplicate-vars suppress-first \
+    plink --bfile ${BIN_FOLDER}${CHR} --list-duplicate-vars suppress-first \
         --allow-no-sex --out temp > temp
     awk '{print $4}' temp.dupvar > DUPSNPS.txt
     rm -r temp*
 
     # QC (duplicated variants and MAF)
     echo "------------------------------------------------------------------------------"
-    plink --bfile ${FILES}${CHR} --exclude DUPSNPS.txt \
+    plink --bfile ${BIN_FOLDER}${CHR} --exclude DUPSNPS.txt \
         --allow-no-sex \
         --maf $MAF \
-        --make-bed --out ${FILES}${CHR}_QC 
+        --make-bed --out ${BIN_FOLDER}${CHR}_QC 
 
     # Merge 
-    plink --bfile ${FILES}${PREFIX} --bmerge ${FILES}${CHR}_QC \
-        --make-bed --out ${FILES}temp 
-    mv ${FILES}temp.bim ${FILES}${PREFIX}.bim
-    mv ${FILES}temp.bed ${FILES}${PREFIX}.bed
-    mv ${FILES}temp.fam ${FILES}${PREFIX}.fam
+    plink --bfile ${BIN_FOLDER}${PREFIX} --bmerge ${BIN_FOLDER}${CHR}_QC \
+        --make-bed --out ${BIN_FOLDER}temp 
+    mv ${BIN_FOLDER}temp.bim ${BIN_FOLDER}${PREFIX}.bim
+    mv ${BIN_FOLDER}temp.bed ${BIN_FOLDER}${PREFIX}.bed
+    mv ${BIN_FOLDER}temp.fam ${BIN_FOLDER}${PREFIX}.fam
 
     echo "------------------------------------------------------------------------------"
 done 
