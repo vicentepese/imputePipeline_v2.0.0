@@ -147,7 +147,7 @@ done
 ######### CONVER TO BINARY PLINK AND MERGE #########
 
 # Convert to plink
-sbatch ${SCRIPTS}bgen2.PLINK
+sbatch ${SCRIPTS}bgen2plink.sh
 
 # Sleep until done 
 USERFLAG="INIT 
@@ -160,5 +160,9 @@ do
     sleep 2m
 done
 
+# Merge
 sbatch ${SCRIPTS}merge_cohort.sh
+
+# Move slurm to log folder
+mv slurm* $SLURM_IMPUTE_LOG
 
