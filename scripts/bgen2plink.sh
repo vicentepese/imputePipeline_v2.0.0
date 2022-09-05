@@ -17,11 +17,11 @@ REF=$(jq -r '.ref' $SETTINGS)
 MERGE=$(jq -r '.merge' $SETTINGS)
 
 # Intialize folders
-GWAS_BY_CHR_FOLDER=$(jq -r '.folder.GWAS_BY_CHR' $SETTINGS)
+BIN_FOLDER=$(jq -r '.folder.BIN_FOLDER' $SETTINGS)
 
 # Path to files / databases
-DATA_IN=${GWAS_BY_CHR_FOLDER}CHR"${SLURM_ARRAY_TASK_ID}"_${PREFIX}.bgen
-DATA_SAMPLE=${GWAS_BY_CHR_FOLDER}CHR"${SLURM_ARRAY_TASK_ID}"_${PREFIX}.sample
+DATA_IN=${BIN_FOLDER}CHR"${SLURM_ARRAY_TASK_ID}"_${PREFIX}.bgen
+DATA_SAMPLE=${BIN_FOLDER}CHR"${SLURM_ARRAY_TASK_ID}"_${PREFIX}.sample
 
 # Load module
 module load qctool/v2.0.1
@@ -36,12 +36,13 @@ qctool_v2.0.1 \
 -threads 16 \
 -threshold 0.8 \
 -ofiletype binary_ped \
--og ${GWAS_BY_CHR_FOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX} \
--os ${GWAS_BY_CHR_FOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.sample
+-og ${BIN_FOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX} \
+-os ${BIN_FOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.sample
 
 # Modify .fam file: ISSUE -- When converting to bed, QCTOOLS ignores the IIDs in the sample files -- loses also pheno and sex
-awk 'NR>2 {print $0}' ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.sample > temp_"$SLURM_ARRAY_TASK_ID"
-awk 'FNR==NR{a[NR]=$1;next}{$1=a[FNR]}1' temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam > fam_temp_"$SLURM_ARRAY_TASK_ID" && mv fam_temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam
-awk 'FNR==NR{a[NR]=$2;next}{$2=a[FNR]}1' temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam  > fam_temp_"$SLURM_ARRAY_TASK_ID" && mv fam_temp_"$SLURM_ARRAY_TASK_ID" ${OUTFOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam
+awk 'NR>2 {print $0}' ${BIN_FOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.sample > temp_"$SLURM_ARRAY_TASK_ID"
+awk 'FNR==NR{a[NR]=$1;next}{$1=a[FNR]}1' temp_"$SLURM_ARRAY_TASK_ID" ${BIN_FOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam > fam_temp_"$SLURM_ARRAY_TASK_ID" && mv fam_temp_"$SLURM_ARRAY_TASK_ID" ${BIN_FOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam
+awk 'FNR==NR{a[NR]=$2;next}{$2=a[FNR]}1' temp_"$SLURM_ARRAY_TASK_ID" ${BIN_FOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam  > fam_temp_"$SLURM_ARRAY_TASK_ID" && mv fam_temp_"$SLURM_ARRAY_TASK_ID" ${BIN_FOLDER}CHR"$SLURM_ARRAY_TASK_ID"_${PREFIX}.fam
 rm temp_"$SLURM_ARRAY_TASK_ID"
-rm m_temp_"$SLURM_ARRAY_TASK_ID"
+rm fam_temp_"$SLURM_ARRAY_TASK_ID"
+
