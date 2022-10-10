@@ -51,7 +51,8 @@ fi
 
 # Create list duplicated variants by name and position
 awk 'a[$2]++{print $0}' ${PREFIX}.bim > Dup_vars_name_pos.txt
-sort -k3n Infinium_mega_sleep_62_to_68.bim | uniq -f2 -D >> Dup_vars_name_pos.txt
+awk 'a[$4]++{print $0}' ${PREFIX}.bim >> Dup_vars_name_pos.txt
+sort -k3n ${PREFIX}.bim | uniq -f2 -D >> Dup_vars_name_pos.txt
 
 # Iteratively remove multi-allelic variants (PLINK does not manage them well)
 NDUPVARS=$(awk 'END{print NR}' ${FILESFOLDER}Dup_vars_name_pos.txt)
